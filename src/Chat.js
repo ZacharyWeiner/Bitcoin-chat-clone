@@ -2,7 +2,18 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import InviteUser from './InviteUser'
 import './App.css'
+import {Button, TextField, List, ListItemText} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 const USER_NAME = 'create_bitcoin_app_user'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+    scrollBehavior: 'scrollY',
+  },
+}));
 
 function Chat({ computer }) {
   const [message, setMessage] = useState('')
@@ -34,14 +45,26 @@ function Chat({ computer }) {
     setMessage('')
   }
 
-  return <div>
+  const classes = useStyles();
+  return (
+    
+  <div>
     <InviteUser chat={chat}></InviteUser><br />
-    <textarea rows="12" cols="60" value={chat.messages.join('\n')} readOnly></textarea>
+  
+    <div className={classes.root}> 
+    <List component="nav" aria-label="main mailbox folders">
+      {chat.messages.map(function(message, i){
+        return <ListItemText > {message} </ListItemText>
+      })}
+      </List>
+    </div>
     <form onSubmit={send}>
-      <input type="string" value={message} onChange={(e) => setMessage(e.target.value)} />
-      <button type="submit">Send</button>
+      <TextField placeholder="Type a cool message here...." variant="filled" fullWidth="true" type="string" value={message} onChange={(e) => setMessage(e.target.value)} />
+      <Button variant="contained" color="primary" type="submit">Send</Button>
     </form>
-  </div>
+    
+    
+  </div>)
 }
 
 export default Chat
