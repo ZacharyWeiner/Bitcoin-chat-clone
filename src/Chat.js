@@ -6,6 +6,7 @@ import {Button, TextField, List, ListItemText} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 const USER_NAME = 'create_bitcoin_app_user'
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -38,7 +39,7 @@ function Chat({ computer }) {
 
   const send = async (e) => {
     e.preventDefault()
-    const username = window.localStorage.getItem(USER_NAME)
+    const username = window.localStorage.getItem('USER_NAME')
     const line = `${username}: ${message}`
     await chat.post(line)
     console.log(`Sent message ${line}\n  chat id  ${chat._id}\n  chat rev ${chat._rev}`)

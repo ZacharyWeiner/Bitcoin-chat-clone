@@ -3,9 +3,6 @@ import useInterval from './useInterval'
 import { makeStyles } from '@material-ui/core/styles';
 import {TextField, Button, Avatar, Grid, Paper} from '@material-ui/core'
 
-const KEY_NAME = 'create_bitcoin_app_key'
-const USER_NAME = 'create_bitcoin_app_user'
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -26,24 +23,24 @@ function Login() {
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
   const [loggedIn, setLoggedIn] = useState(false)
+  //const [chain, setChain] = useState('bsv')
 
   useInterval(() => {
-    setLoggedIn(!!window.localStorage.getItem(KEY_NAME))
+    setLoggedIn(!!window.localStorage.getItem('BIP_39_KEY'))
   }, 500)
 
   const login = (e) => {
     e.preventDefault()
-    window.localStorage.setItem(KEY_NAME, password)
-    window.localStorage.setItem(USER_NAME, username)
+    window.localStorage.setItem('BIP_39_KEY', password)
+    window.localStorage.setItem('USER_NAME', username)
   }
   const classes = useStyles();
   return loggedIn
-    ? <><Button onClick={() => window.localStorage.removeItem(KEY_NAME)}>
+    ? <><Button onClick={() => window.localStorage.removeItem('BIP_39_KEY')}>
         Logout
       </Button><br /></>
     : <div className='login-screen'>
         <div>
-        
         <Grid container spacing={3} direction="row" justify="center" alignItems="center">
           <Grid item xs={12}>
           <Paper className={classes.paper}><h1>Blabber</h1></Paper>
